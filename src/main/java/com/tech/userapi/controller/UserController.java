@@ -13,7 +13,7 @@ import javax.validation.Valid;
 
 @RestController
 @CrossOrigin(origins = "*", methods = {RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT})
-@RequestMapping(path = "/api/v1/user")
+@RequestMapping(path = "/api/user")
 @RequiredArgsConstructor
 @Slf4j
 public class UserController {

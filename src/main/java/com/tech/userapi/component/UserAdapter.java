@@ -28,7 +28,7 @@ public class UserAdapter {
     public User userRequestToModel(UserRequest userRequest) {
         Authentication authentication = authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(userRequest.getEmail(), userRequest.getPassword()));
-        SecurityContextHolder.getContext().setAuthentication(authentication);
+        // SecurityContextHolder.getContext().setAuthentication(authentication);
         String jwt = jwtUtils.generateJwtToken(authentication);
         User adapted = User.builder()
                 .email(userRequest.getEmail())
