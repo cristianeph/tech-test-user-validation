@@ -5,9 +5,11 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import javax.validation.Valid;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 import java.util.List;
 
 @Data
@@ -24,6 +26,7 @@ public class UserRequest {
     @Pattern(regexp = "(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9].*[0-9])",
             message = "La contraseña debe tener por lo menos 1 letra mayúscula 1 minúscula y 2 números")
     private String password;
-    @NotBlank(message = "Debe enviar por lo menos un teléfono")
+    @Size(min = 1, message = "Debe enviar por lo menos un teléfono")
+    @Valid
     private List<PhoneRequest> phones;
 }

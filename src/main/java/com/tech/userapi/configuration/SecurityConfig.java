@@ -1,6 +1,6 @@
 package com.tech.userapi.configuration;
 
-import com.picorana.client.hub.community.api.service.impl.UserDetailsServiceImpl;
+import com.tech.userapi.service.UserDetailsServiceImpl;
 import lombok.AllArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -21,7 +21,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @AllArgsConstructor
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
     private final UserDetailsServiceImpl userDetailsServiceImpl;
-    private final com.picorana.client.hub.community.api.configuration.JwtUnauthorizedConfig jwtUnauthorizedConfig;
+    private final JwtUnauthorizedConfig jwtUnauthorizedConfig;
 
     @Bean
     public JwtTokenFilterConfig authenticationJwtTokenFilter() {
@@ -53,7 +53,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                     .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
                     .authorizeRequests()
-                    .antMatchers("/api/auth/**").permitAll()
+                    .antMatchers("/api/user/**").permitAll()
                     .antMatchers("/api/**").permitAll()
                     .antMatchers( "/actuator/**").permitAll()
                     .anyRequest().authenticated();
