@@ -9,6 +9,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
+
 @RestController
 @CrossOrigin(origins = "*", methods = {RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT})
 @RequestMapping(path = "/api/v1/user")
@@ -18,7 +20,7 @@ public class UserController {
     private final UserService userService;
 
     @PostMapping(value = "")
-    ResponseEntity<User> validateUser(@RequestBody UserRequest userRequest) {
+    ResponseEntity<User> validateUser(@Valid @RequestBody UserRequest userRequest) {
         return new ResponseEntity<User>(userService.validate(userRequest), HttpStatus.CREATED);
     }
 }
