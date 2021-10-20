@@ -11,6 +11,7 @@ import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @ControllerAdvice
 public class CustomExceptionHandler extends ResponseEntityExceptionHandler {
@@ -22,6 +23,12 @@ public class CustomExceptionHandler extends ResponseEntityExceptionHandler {
             WebRequest request) {
         BindingResult result = ex.getBindingResult();
         final List<FieldError> fieldErrors = result.getFieldErrors();
-        return new ResponseEntity(fieldErrors.toArray(new FieldError[fieldErrors.size()]), HttpStatus.BAD_REQUEST);
+        final List<CustomExceptionMessage> fieldMessages = fieldErrors.stream()
+                .map(exception -> CustomExceptionMessage.builder()
+                        .mensaje(exception.getDefaultMessage())
+                        .build())
+                .collect(Collectors.toList());
+        // return new ResponseEntity(fieldErrors.toArray(new FieldError[fieldErrors.size()]), HttpStatus.BAD_REQUEST);
+        return new ResponseEntity(fieldMessages, HttpStatus.BAD_REQUEST);
     }
 }
