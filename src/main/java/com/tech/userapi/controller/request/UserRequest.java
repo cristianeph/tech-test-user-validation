@@ -23,7 +23,7 @@ public class UserRequest {
     @Email(message = "Ingrese un correo válido")
     private String email;
     @NotBlank(message = "La contraseña no puede estar vacía")
-    @Pattern(regexp = "(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9].*[0-9])",
+    @Pattern(regexp = "^(?=.*?\\\\d.*\\\\d)(?=\\\\w*[A-Z])(?=\\\\w*[a-z])",
             message = "La contraseña debe tener por lo menos 1 letra mayúscula 1 minúscula y 2 números")
     private String password;
     @Size(min = 1, message = "Debe enviar por lo menos un teléfono")
