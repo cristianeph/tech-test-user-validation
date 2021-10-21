@@ -13,6 +13,7 @@ import javax.persistence.*;
 @Table(name = "phone")
 public class Phone {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private String phone;
     @Column(name = "city_code")
