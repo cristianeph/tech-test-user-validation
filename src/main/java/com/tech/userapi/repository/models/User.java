@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
+import org.hibernate.annotations.GenericGenerator;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -21,6 +22,8 @@ import java.util.UUID;
 @Table(name = "user")
 public class User extends ModelBase implements UserDetails {
     @Id
+    @GeneratedValue(generator = "uuid2")
+    @GenericGenerator(name = "uuid2", strategy = "org.hibernate.id.UUIDGenerator")
     private UUID id;
     private String name;
     private String email;
@@ -31,7 +34,7 @@ public class User extends ModelBase implements UserDetails {
 
     @Override
     public boolean isEnabled() {
-        return getIsActive();
+        return getIsActive().equals(Boolean.TRUE);
     }
 
     @Override
@@ -46,16 +49,16 @@ public class User extends ModelBase implements UserDetails {
 
     @Override
     public boolean isAccountNonExpired() {
-        return !isEnabled();
+        return true;
     }
 
     @Override
     public boolean isAccountNonLocked() {
-        return !isEnabled();
+        return true;
     }
 
     @Override
     public boolean isCredentialsNonExpired() {
-        return !isEnabled();
+        return true;
     }
 }
