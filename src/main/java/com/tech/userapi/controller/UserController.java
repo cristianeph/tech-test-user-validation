@@ -1,6 +1,7 @@
 package com.tech.userapi.controller;
 
 import com.tech.userapi.controller.request.UserRequest;
+import com.tech.userapi.controller.response.UserResponse;
 import com.tech.userapi.repository.models.User;
 import com.tech.userapi.service.UserService;
 import lombok.RequiredArgsConstructor;
@@ -20,7 +21,7 @@ public class UserController {
     private final UserService userService;
 
     @PostMapping(value = "")
-    ResponseEntity<User> validateUser(@Valid @RequestBody UserRequest userRequest) {
-        return new ResponseEntity<User>(userService.validate(userRequest), HttpStatus.CREATED);
+    ResponseEntity<UserResponse> validateUser(@Valid @RequestBody UserRequest userRequest) {
+        return new ResponseEntity<UserResponse>(userService.validate(userRequest), HttpStatus.CREATED);
     }
 }
